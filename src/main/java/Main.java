@@ -3,7 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scrabble scrabble = new Scrabble("");
+        Scrabble scrabble = new Scrabble("OXYPHENBUTAZONE");
 
         System.out.println(scrabble.score());
     }

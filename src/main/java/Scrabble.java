@@ -17,7 +17,7 @@ public class Scrabble {
         for (char c : this.word.toCharArray()) {
 
             String key = String.valueOf(c);
-            totalPoints += this.letters.get(key);
+            totalPoints += this.letters.get(key.toLowerCase());
         }
         return totalPoints;
     }
