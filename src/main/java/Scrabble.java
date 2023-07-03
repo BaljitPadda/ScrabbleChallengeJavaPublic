@@ -5,7 +5,7 @@ public class Scrabble {
     }
 
     public int score() {
-        if(this.word.equals(""))
+        if(this.word == null || this.word.equals(""))
             return 0;
         return 0;
     }

@@ -13,7 +13,6 @@ public class ScrabbleTest {
     }
 
     @Test
-    @Disabled
     public void returnsZeroForNull() {
         Scrabble scrabble = new Scrabble(null);
         assertEquals(scrabble.score(), 0);
