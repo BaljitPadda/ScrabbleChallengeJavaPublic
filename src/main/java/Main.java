@@ -3,7 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scrabble scrabble = new Scrabble("quirky", new Character[]{}, new Character[]{},true, false);
+        Scrabble scrabble = new Scrabble("a", new Character[]{}, new Character[]{'A'},false, false);
 
         System.out.println(scrabble.score());
     }

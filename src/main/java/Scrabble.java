@@ -16,19 +16,21 @@ public class Scrabble {
     public Scrabble(String word, Character[] doubleLetters, Character[] tripleLetters, boolean doubleWord, boolean tripleWord) {
         this.word = word;
         this.letters = letters();
-        this.doubleLetters = Arrays.asList(doubleLetters);
-        this.tripleLetters = Arrays.asList(tripleLetters);
+        this.doubleLetters = new ArrayList<>(Arrays.asList(doubleLetters));
+        this.tripleLetters = new ArrayList<>(Arrays.asList(tripleLetters));
         this.doubleWord = doubleWord;
         this.tripleWord = tripleWord;
+
+        this.doubleLetters.replaceAll(Character::toLowerCase);
+        this.tripleLetters.replaceAll(Character::toLowerCase);
     }
 
     public int score() {
         int totalPoints = 0;
         if (!isValidInput()) return 0;
 
-        for (char c : this.word.toCharArray()) {
-            totalPoints += getTileValue(c);
-        }
+        for (char c : this.word.toCharArray()) totalPoints += getTileValue(c);
+
         if (doubleWord) totalPoints *= 2;
         if (tripleWord) totalPoints *= 3;
         return totalPoints;
@@ -39,11 +41,18 @@ public class Scrabble {
     public int getTileValue(char c) {
         int tileValue = this.letters.get(Character.toLowerCase(c));
 
-        if (doubleLetters.contains(c)) tileValue *= 2;
-        if (tripleLetters.contains(c)) tileValue *= 3;
-
+        if (doubleLetters.contains(c)) {
+            tileValue *= 2;
+            doubleLetters.remove(Character.valueOf(c));
+            return tileValue;
+        }
+         if (tripleLetters.contains(c)) {
+            tileValue *= 3;
+            tripleLetters.remove(Character.valueOf(c));
+        }
         return tileValue;
     }
+
     public Map<Character, Integer> letters() {
         Map<Character, Integer> letters = new HashMap<>();
 
