@@ -8,7 +8,7 @@ public class Scrabble {
     private final boolean doubleWord;
     private final boolean tripleWord;
 
-    // Could not implement default parameters, so I have attempted to overload the constructor.
+    // Java does not have default parameters, so I have attempted to overload the constructor.
     public Scrabble(String word) {
         this(word, new Character[]{}, new Character[]{}, false, false);
     }
@@ -30,14 +30,21 @@ public class Scrabble {
         if (!isValidInput()) return 0;
 
         for (char c : this.word.toCharArray()) totalPoints += getTileValue(c);
+        totalPoints = wordMultiplier(totalPoints);
 
-        if (doubleWord) totalPoints *= 2;
-        if (tripleWord) totalPoints *= 3;
         return totalPoints;
     }
+
+    public int wordMultiplier(int x) {
+        if (doubleWord) x *= 2;
+        if (tripleWord) x *= 3;
+        return x;
+    }
+
     public boolean isValidInput() {
         return this.word != null && !this.word.trim().equals("");
     }
+
     public int getTileValue(char c) {
         int tileValue = this.letters.get(Character.toLowerCase(c));
 
@@ -46,7 +53,7 @@ public class Scrabble {
             doubleLetters.remove(Character.valueOf(c));
             return tileValue;
         }
-         if (tripleLetters.contains(c)) {
+        if (tripleLetters.contains(c)) {
             tileValue *= 3;
             tripleLetters.remove(Character.valueOf(c));
         }
